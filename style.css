@@ -1,0 +1,90 @@
+*{
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+    body{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    padding-left: 20%;
+    padding-right: 20%;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+.title{
+margin-top: 2rem;
+}
+.inputarea{
+    text-align: center;
+}
+.inputarea>*{
+display: block;
+margin-top: 1rem;
+}
+#input{
+    width: 20rem;
+    height: 2rem;
+    border: 2px solid black;
+    border-radius: 0.3rem;
+}
+.button{
+    background-color: steelblue;
+    padding: 0.5rem 2rem;
+    color: whitesmoke;
+    font-size: 1rem;
+    font-weight: bolder;
+    border-radius: 0.4rem;
+}
+#containerInput {
+  min-height: 200px;
+  border: 5px solid #000;
+  border-radius: 1rem;
+  box-shadow: #000 0.5rem 0.5rem 0.5rem;
+  position: relative;
+  margin: 1rem;
+  margin-bottom: 20px;
+  margin-top: 2rem;
+  flex: 1;
+}
+#containerOutput {
+  min-height: 200px;
+  border: 5px solid #000;
+  border-radius: 1rem;
+  box-shadow: #000 0.5rem 0.5rem 0.5rem;
+  position: relative;
+  margin: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 20px;
+  flex: 1;
+}
+#container{
+    width: 100vw;
+    display: flex;
+}
+.block {
+  background-color: #c7e811;
+  position: absolute;
+  bottom: 0;
+  border: 2px solid rgb(255, 255, 255);
+}
+.waterBlock{
+  background-color: #3498db;
+  position: absolute;
+  bottom: 0;
+  border: 2px solid rgb(255, 255, 255);
+}
+#result{
+    color: black;
+    font-size: 2rem;
+    font-family: sans-serif;
+    font-weight: bolder;
+    margin-top: 1rem;
+}
+.water-result{
+    color:#3498db ;
+}

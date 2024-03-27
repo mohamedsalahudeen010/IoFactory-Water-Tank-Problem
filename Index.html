@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Water Tank Problem</title>
+  <style>
+   
+  </style>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div>
+    <h1 class="title">
+      Water Tank Problem
+    </h1>
+      <div class="inputarea">
+        <label for="inputArr">Enter values (Comma Seperated)</label>
+        <input type="text" id="input" name="input"
+        value=""
+        onclick="(e)=>{e.target.value=''}" placeholder="e.g. 0,4,0,0,0,6,0,6,4,0">
+        <div>
+          <button class="button" id="array-btn" 
+        type="submit"
+        onclick="calculate()">Calculate</button>    
+        </div>
+    </div>
+  </div>
+  <div id="container">
+    <div id="containerInput"></div>
+  <div id="containerOutput"></div>
+  </div>
+  
+  <div id="result"></div>
+
+  <script>
+  
+  function calculate() {
+   
+    let inputElement=document.getElementById('input')
+    let inputArray=inputElement.value.split(',').map(Number)
+    waterAndBricks(inputArray)
+  
+}
+const countWaterUnits = (finalCase) => {
+    let sum = 0
+    for (let i = 0; i < finalCase.length; i++) {
+        let element = finalCase[i];
+        if (element != '-') {
+            sum += +element
+        }
+    }
+    return sum
+}
+
+function waterAndBricks(bricks) {
+   
+   let firstCase=[]
+   let secondCase=[]
+   let finalCase=[]
+   let result=[]
+   let lastValueForFirstCase=0
+   let lastValueForSecondCase=0
+   const containerInput = document.getElementById('containerInput');
+   const containerOutput = document.getElementById('containerOutput');
+   const resultElement=document.getElementById("result");
+ 
+   containerInput.innerHTML=""
+   containerOutput.innerHTML=""
+   let max=Math.max(...bricks)
+   let height=max>15?12:20
+   let width=(45/bricks.length)
+  
+   let elementHeight=max<=10?250:max<=20?300:max<=20?400:500
+   containerInput.style.height=elementHeight+"px"
+   containerOutput.style.height=elementHeight+"px"
+
+//In Firstcase Calculate the front brick of the water
+   for (let i = 0; i < bricks.length; i++) {
+       let element = bricks[i];
+       if (element == 0) {
+           firstCase.push(lastValueForFirstCase)
+       }else{
+           firstCase.push('-')
+           lastValueForFirstCase =element
+       }
+   }
+   console.log("FIrstCase",firstCase)
+   
+   //In Secondcase Calculate the rear brick of the water
+   for (let  i = bricks.length - 1; i >= 0; i--) {
+       let element = bricks[i];
+       if (element == 0) {
+           secondCase[i] = lastValueForSecondCase
+       }else{
+           secondCase[i]= '-'
+           lastValueForSecondCase=element
+       }
+   }
+   console.log("SecondCase",secondCase)
+
+  //  In Finalcase Calculate water level by comparing front and rear walls
+   for (let i = 0; i < bricks.length; i++) {
+       let fc=firstCase[i]
+       let sc=secondCase[i]
+       if (fc == '-') {
+           finalCase[i]='-'
+       }else{
+           finalCase[i]=fc>sc ? sc : fc
+       }
+   }
+   console.log("finalCase",finalCase)
+
+
+   for (let i = 0; i < bricks.length; i++) {
+       let element = bricks[i];
+       const block = document.createElement('div');
+        const blockWater=document.createElement('div');
+        const blockWaterResult=document.createElement('div');
+       if(element == 0){
+        blockWater.className = 'waterBlock';
+        blockWater.innerHTML=finalCase[i]
+         //Providing space
+       
+        blockWater.style.left = (i * width) + 'vw'; 
+        blockWater.style.width = width-0.1 + 'vw'; 
+        // Providing height
+        blockWater.style.height = finalCase[i] * height + 'px'; 
+        containerInput.appendChild(blockWater);
+
+        blockWaterResult.className = 'waterBlock';
+        blockWaterResult.innerHTML=finalCase[i]
+         //Providing space
+         blockWaterResult.style.left = (i * width) + 'vw'; 
+         blockWaterResult.style.width = width-0.1 + 'vw'; 
+        // Providing height
+        blockWaterResult.style.height = finalCase[i] * height + 'px'; 
+       
+        containerOutput.appendChild(blockWaterResult);
+       }
+       else{
+        block.className = 'block';
+        block.innerHTML=element
+         //Providing space
+        block.style.left = (i * width) + 'vw'; 
+        block.style.width = width-0.1 + 'vw';  
+        // Providing height
+        block.style.height = element * height + 'px'; 
+        containerInput.appendChild(block); 
+        // containerOutput.appendChild(blockWater); 
+       }
+   }
+  
+   console.log("RESULT",result);
+   console.log(countWaterUnits(finalCase));
+   let totalWater=countWaterUnits(finalCase)
+   totalWater?resultElement.innerHTML=`Output is <span class="water-result">${totalWater}</span> Unit of water`:""
+  
+}
+
+  </script>
+</body>
+</html>
